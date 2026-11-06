@@ -4,3 +4,5 @@ backend/uploads/
 .env
 .env.*
 !.env.example
+build/
+.DS_Store
