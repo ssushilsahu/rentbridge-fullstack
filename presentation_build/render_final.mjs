@@ -1,0 +1,4 @@
+import {PresentationFile,FileBlob} from 'file:///C:/Program%20Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt/dependencies/node/node_modules/@oai/artifact-tool/dist/artifact_tool.mjs';
+import fs from 'node:fs/promises';import path from 'node:path';
+const root='C:/Users/user/Downloads/rentbridge-fullstack/rentbridge', final=path.join(root,'deliverables','RentBridge_Project_Overview_2026-11-07.pptx'), dir=path.join(root,'presentation_build','final-renders');
+const deck=await PresentationFile.importPptx(await FileBlob.load(final));await fs.mkdir(dir,{recursive:true});for(let i=0;i<deck.slides.items.length;i++){const png=await deck.export({slide:deck.slides.items[i],format:'png',scale:1});await fs.writeFile(path.join(dir,'slide-'+String(i+1).padStart(2,'0')+'.png'),new Uint8Array(await png.arrayBuffer()))}console.log(JSON.stringify({slides:deck.slides.items.length,dir}));
